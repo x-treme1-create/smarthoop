@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SmartHoop</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+  :root{
+    --chalk:#F7F3EA; --ink:#2A2823; --slate:#4B5568;
+    --red:#B23A3F; --gold:#A6874A; --teal:#2E9C90;
+    --card:#FFFFFF; --line:#E6DECB; --muted:#948C77;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--chalk);font-family:'Inter',system-ui,sans-serif;color:var(--ink);
+    min-height:100vh;padding:env(safe-area-inset-top) 16px calc(28px + env(safe-area-inset-bottom));
+    max-width:520px;margin:0 auto;}
+  header{padding:18px 0 12px;display:flex;flex-direction:column;align-items:center;}
+  .wordmark{font-family:'Poppins',sans-serif;font-weight:800;font-style:italic;font-size:15px;
+    letter-spacing:.05em;color:var(--ink);}
+  .wordmark b{color:var(--gold);}
+  .swoosh{margin-top:-3px;}
+  .app-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;letter-spacing:-.02em;margin:8px 0 0;}
+  button{font-family:'Inter',sans-serif;font-weight:700;border:none;cursor:pointer;}
+  .connectbar{display:flex;gap:10px;margin:14px 0 8px;}
+  .btn{border-radius:16px;padding:16px;font-size:15px;}
+  .btn.primary{flex:1;background:var(--red);color:#fff;}
+  .btn.primary:active{filter:brightness(.92);}
+  .btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);padding:16px 18px;}
+  .btn:disabled{opacity:.4;}
+  .fallback{display:block;width:100%;background:none;color:var(--muted);font-size:12px;
+    font-weight:600;text-decoration:underline;padding:6px 0 0;}
+  .status{display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;
+    font-weight:600;color:var(--muted);margin:12px 0 14px;text-align:center;}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+  .status.on{color:var(--teal);} .status.on .dot{background:var(--teal);}
+  .status.err{color:var(--red);} .status.err .dot{background:var(--red);}
+  .ringwrap{display:flex;justify-content:center;}
+  .ring{width:250px;height:250px;border-radius:50%;position:relative;
+    background:conic-gradient(var(--red) 0deg, var(--line) 0deg);
+    display:flex;align-items:center;justify-content:center;transition:background .2s linear;}
+  .ring::before{content:'';position:absolute;inset:16px;border-radius:50%;background:var(--chalk);}
+  .ring-in{position:relative;z-index:2;text-align:center;}
+  .ring-in .num{font-family:'Poppins',sans-serif;font-size:64px;font-weight:700;line-height:1;
+    font-variant-numeric:tabular-nums;}
+  .ring-in .lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);margin-top:6px;}
+  .dirline{text-align:center;font-family:'Poppins',sans-serif;font-weight:700;font-size:22px;
+    margin:12px 0 16px;min-height:28px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;}
+  .tile .k{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+  .tile .v{font-family:'Poppins',sans-serif;font-size:23px;font-weight:700;margin-top:3px;
+    font-variant-numeric:tabular-nums;}
+  .v.teal{color:var(--teal);} .v.red{color:var(--red);} .v.gold{color:var(--gold);}
+  .pausebanner{background:var(--slate);color:#fff;border-radius:18px;padding:13px 16px;
+    margin-bottom:12px;font-weight:700;font-size:14px;display:none;}
+  .pausebanner.show{display:block;}
+  .raw{font-size:11px;color:var(--muted);text-align:center;margin-top:14px;
+    font-family:ui-monospace,Menlo,monospace;word-break:break-all;min-height:16px;}
+  .hint{font-size:12px;color:var(--muted);text-align:center;line-height:1.65;margin-top:16px;}
+  .hint b{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wordmark">HOOP<b>YOUR</b>BODY</div>
+  <svg class="swoosh" width="160" height="14" viewBox="0 0 160 14">
+    <path d="M2 4 Q80 18 158 2" stroke="#B23A3F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </svg>
+  <h1 class="app-name">SmartHoop</h1>
+</header>
+
+<div class="connectbar">
+  <button class="btn primary" id="btnConnect">Mit Sensor verbinden</button>
+  <button class="btn ghost" id="btnReset" disabled>Neu</button>
+</div>
+<button class="fallback" id="btnAny">Sensor wird nicht gefunden?</button>
+
+<div class="status" id="status"><span class="dot"></span><span id="statusText">Nicht verbunden</span></div>
+
+<div class="pausebanner" id="pauseBanner">&#9208; Pause</div>
+
+<div class="ringwrap">
+  <div class="ring" id="ring">
+    <div class="ring-in">
+      <div class="num" id="vRev">0</div>
+      <div class="lbl">Umdrehungen</div>
+    </div>
+  </div>
+</div>
+
+<div class="dirline" id="vDir">&mdash;</div>
+
+<div class="grid">
+  <div class="tile"><div class="k">Tempo</div><div class="v teal" id="vRpm">0,0 U/min</div></div>
+  <div class="tile"><div class="k">Trainingszeit</div><div class="v" id="vTime">0:00</div></div>
+  <div class="tile"><div class="k">H&uuml;ftschw&uuml;nge</div><div class="v" id="vSw">0</div></div>
+  <div class="tile"><div class="k">Kraft</div><div class="v gold" id="vForce">0,0 N</div></div>
+  <div class="tile"><div class="k">Pausen</div><div class="v red" id="vPauses">0</div></div>
+  <div class="tile"><div class="k">&Oslash; Tempo</div><div class="v" id="vAvg">0,0 U/min</div></div>
+</div>
+
+<div class="raw" id="raw"></div>
+<div class="hint" id="hint">
+  Am Mac: <b>Chrome</b> &middot; Am iPhone: App <b>Bluefy</b><br>
+  Sensor einschalten und kurz ruhig halten, bis die LED gr&uuml;n leuchtet
+</div>
+
+<script>
+(function(){
+  var SERVICE='19b10000-e8f2-537e-4f6c-d104768a1214';
+  var CHAR   ='19b10001-e8f2-537e-4f6c-d104768a1214';
+
+  var device=null, connected=false, isPaused=false;
+  var offRev=0, offSw=0, offPause=0;
+  var lastRev=0, lastSw=0, lastPause=0;
+  var seconds=0, rpmSum=0, rpmCount=0, packets=0;
+
+  function $(id){ return document.getElementById(id); }
+  function setStatus(t,m){ $('statusText').textContent=t; $('status').className='status'+(m?' '+m:''); }
+  function fmtTime(s){ var m=Math.floor(s/60); return m+':'+String(s%60).padStart(2,'0'); }
+  function num(v,d){ return v.toFixed(d).replace('.',','); }
+
+  async function connect(anyDevice){
+    if(!navigator.bluetooth){
+      setStatus('Dieser Browser kann kein Bluetooth','err');
+      $('hint').innerHTML='Am Mac bitte <b>Chrome</b> verwenden, am iPhone die App <b>Bluefy</b>. Safari kann kein Web Bluetooth.';
+      return;
+    }
+    try{
+      setStatus('Suche Sensor\u2026');
+      var opts = anyDevice
+        ? { acceptAllDevices:true, optionalServices:[SERVICE] }
+        : { filters:[{namePrefix:'SmartHoop'}], optionalServices:[SERVICE] };
+      device = await navigator.bluetooth.requestDevice(opts);
+      device.addEventListener('gattserverdisconnected', onDisconnected);
+
+      setStatus('Verbinde\u2026');
+      var server  = await device.gatt.connect();
+      var service = await server.getPrimaryService(SERVICE);
+      var ch      = await service.getCharacteristic(CHAR);
+      await ch.startNotifications();
+      ch.addEventListener('characteristicvaluechanged', onData);
+
+      connected=true; packets=0;
+      $('btnConnect').textContent='Verbindung trennen';
+      $('btnReset').disabled=false;
+      setStatus('Verbunden \u2013 warte auf Daten\u2026','on');
+    }catch(e){
+      if(e && e.name==='NotFoundError'){ setStatus('Kein Ger\u00e4t ausgew\u00e4hlt'); }
+      else { setStatus('Verbindung fehlgeschlagen','err'); }
+      console.error(e);
+    }
+  }
+
+  function disconnect(){
+    try{ if(device && device.gatt.connected) device.gatt.disconnect(); }catch(e){}
+    onDisconnected();
+  }
+
+  function onDisconnected(){
+    connected=false;
+    $('btnConnect').textContent='Mit Sensor verbinden';
+    setStatus('Nicht verbunden');
+  }
+
+  function onData(ev){
+    try{
+      var text = new TextDecoder().decode(ev.target.value).trim();
+      $('raw').textContent = text;
+      var p = text.split(',');
+      if(p.length < 7) return;
+
+      var rev=parseInt(p[0],10); if(isNaN(rev)) return;
+      var dir=parseInt(p[1],10)||0;
+      var deg=parseFloat(p[2])||0;
+      var sw=parseInt(p[3],10)||0;
+      var force=parseFloat(p[4])||0;
+      var pause=(p[5].trim()==='1');
+      var pauses=parseInt(p[6],10)||0;
+
+      packets++;
+      if(packets===1) setStatus('Verbunden','on');
+
+      lastRev=rev; lastSw=sw; lastPause=pauses; isPaused=pause;
+      var rpm=Math.abs(deg)/6;
+
+      $('vRev').textContent    = Math.max(0, rev-offRev);
+      $('vSw').textContent     = Math.max(0, sw-offSw);
+      $('vPauses').textContent = Math.max(0, pauses-offPause);
+      $('vRpm').textContent    = num(rpm,1)+' U/min';
+      $('vForce').textContent  = num(force,1)+' N';
+      $('vDir').textContent    = pause ? '\u2014' : (dir>0 ? '\u2192 rechts' : (dir<0 ? '\u2190 links' : '\u2014'));
+      $('pauseBanner').className = 'pausebanner'+(pause?' show':'');
+
+      var d=Math.min(360,(rpm/90)*360);
+      $('ring').style.background='conic-gradient(var(--red) '+d+'deg, var(--line) '+d+'deg)';
+
+      if(!pause && rpm>0){ rpmSum+=rpm; rpmCount++; }
+      $('vAvg').textContent = num(rpmCount?rpmSum/rpmCount:0,1)+' U/min';
+    }catch(e){ console.error(e); }
+  }
+
+  function resetSession(){
+    offRev=lastRev; offSw=lastSw; offPause=lastPause;
+    seconds=0; rpmSum=0; rpmCount=0;
+    $('vRev').textContent='0'; $('vSw').textContent='0'; $('vPauses').textContent='0';
+    $('vAvg').textContent='0,0 U/min'; $('vTime').textContent='0:00';
+  }
+
+  setInterval(function(){
+    if(connected && !isPaused) seconds++;
+    $('vTime').textContent=fmtTime(seconds);
+  },1000);
+
+  $('btnConnect').addEventListener('click',function(){ connected?disconnect():connect(false); });
+  $('btnAny').addEventListener('click',function(){ connect(true); });
+  $('btnReset').addEventListener('click',resetSession);
+})();
+</script>
+</body>
+</html>
