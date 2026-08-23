@@ -18,17 +18,15 @@
     min-height:100vh;padding:env(safe-area-inset-top) 0 calc(80px + env(safe-area-inset-bottom));
     max-width:520px;margin:0 auto;}
 
-  /* Header */
   header{padding:16px 20px 10px;display:flex;align-items:center;justify-content:space-between;}
   .wordmark{font-family:'Poppins',sans-serif;font-weight:800;font-style:italic;font-size:13px;
     letter-spacing:.05em;color:var(--ink);}
   .wordmark b{color:var(--gold);}
-  .sensor-btn{font-family:'Inter',sans-serif;font-weight:700;font-size:12px;border:none;
+  .sensor-btn{font-family:'Inter',sans-serif;font-weight:700;font-size:12px;
     background:var(--card);border:1px solid var(--line);border-radius:20px;padding:7px 14px;
     cursor:pointer;color:var(--ink);}
   .sensor-btn.on{background:var(--teal);color:#fff;border-color:var(--teal);}
 
-  /* Bottom nav */
   .navbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;
     background:var(--card);border-top:1px solid var(--line);display:flex;
     padding-bottom:env(safe-area-inset-bottom);}
@@ -38,106 +36,101 @@
   .navitem.on{color:var(--red);}
   .navitem svg{width:22px;height:22px;}
 
-  /* Screens */
   .screen{display:none;padding:0 20px 20px;}
   .screen.active{display:block;}
 
-  /* Eyebrow + Heading */
   .eyebrow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
     color:var(--red);margin:0 0 3px;}
-  h2{font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;margin:0 0 16px;
+  h2{font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;margin:0 0 14px;
     letter-spacing:-.01em;}
 
-  /* Status */
   .statusline{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
-    color:var(--muted);margin-bottom:14px;}
+    color:var(--muted);margin-bottom:12px;}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex-shrink:0;}
   .statusline.on{color:var(--teal);} .statusline.on .dot{background:var(--teal);}
   .statusline.rec{color:var(--red);} .statusline.rec .dot{background:var(--red);animation:pulse 1s infinite;}
   @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
 
-  /* Ring */
-  .ringwrap{display:flex;justify-content:center;margin-bottom:8px;}
-  .ring{width:240px;height:240px;border-radius:50%;position:relative;
+  .ringwrap{display:flex;justify-content:center;margin-bottom:6px;}
+  .ring{width:230px;height:230px;border-radius:50%;position:relative;
     background:conic-gradient(var(--red) 0deg, var(--line) 0deg);
     display:flex;align-items:center;justify-content:center;transition:background .2s;}
-  .ring::before{content:'';position:absolute;inset:16px;border-radius:50%;background:var(--chalk);}
+  .ring::before{content:'';position:absolute;inset:15px;border-radius:50%;background:var(--chalk);}
   .ring-in{position:relative;z-index:2;text-align:center;}
-  .ring-in .num{font-family:'Poppins',sans-serif;font-size:58px;font-weight:700;line-height:1;
+  .ring-in .num{font-family:'Poppins',sans-serif;font-size:56px;font-weight:700;line-height:1;
     font-variant-numeric:tabular-nums;}
   .ring-in .lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
     color:var(--muted);margin-top:4px;}
 
   .dirline{text-align:center;font-family:'Poppins',sans-serif;font-weight:700;font-size:20px;
-    margin:8px 0 14px;min-height:26px;}
+    margin:8px 0 12px;min-height:26px;}
 
-  /* Kacheln */
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
   .tile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;}
   .tile .k{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
   .tile .v{font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;margin-top:2px;
     font-variant-numeric:tabular-nums;}
   .v.teal{color:var(--teal);} .v.red{color:var(--red);} .v.gold{color:var(--gold);}
 
-  /* Pause-Banner */
   .pausebanner{background:var(--slate);color:#fff;border-radius:16px;padding:11px 14px;
-    margin-bottom:12px;font-weight:700;font-size:13px;display:none;}
+    margin-bottom:10px;font-weight:700;font-size:13px;display:none;}
   .pausebanner.show{display:block;}
 
-  /* Session-Buttons */
-  .btnrow{display:flex;gap:10px;margin-bottom:10px;}
-  .btn{flex:1;border:none;border-radius:14px;padding:16px;font-size:15px;font-weight:700;
+  .btnrow{display:flex;gap:10px;margin-bottom:8px;}
+  .btn{flex:1;border:none;border-radius:14px;padding:15px;font-size:15px;font-weight:700;
     font-family:'Inter',sans-serif;cursor:pointer;}
-  .btn.primary{background:var(--red);color:#fff;}
-  .btn.primary.green{background:var(--green);}
+  .btn.primary{background:var(--green);color:#fff;}
   .btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);}
   .btn:disabled{opacity:.4;cursor:default;}
 
-  /* Session-Zusammenfassung */
-  .summary{background:var(--ink);color:#fff;border-radius:20px;padding:20px;margin-bottom:16px;}
-  .summary h3{font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;margin:0 0 14px;}
-  .sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .sum-item .k{font-size:11px;font-weight:600;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;}
-  .sum-item .v{font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;margin-top:2px;}
-  .sum-item .v.teal{color:#5ECFC4;}
-  .sum-item .v.gold{color:#D4B06A;}
+  .raw{font-size:10px;color:var(--muted);text-align:center;margin-top:8px;
+    font-family:ui-monospace,Menlo,monospace;word-break:break-all;min-height:14px;}
 
-  /* Verlauf */
+  /* ── Zusammenfassung (Modal) ── */
+  .overlay{position:fixed;inset:0;background:rgba(42,40,35,.6);z-index:100;
+    display:none;align-items:flex-end;justify-content:center;}
+  .overlay.show{display:flex;}
+  .modal{background:var(--chalk);border-radius:28px 28px 0 0;padding:24px 24px calc(24px + env(safe-area-inset-bottom));
+    width:100%;max-width:520px;max-height:90vh;overflow-y:auto;}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .modal-head h3{font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;margin:0;}
+  .modal-close{border:none;background:var(--line);border-radius:50%;width:32px;height:32px;
+    font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+  .sum-item{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;}
+  .sum-item .k{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+  .sum-item .v{font-family:'Poppins',sans-serif;font-size:24px;font-weight:700;margin-top:4px;}
+
+  /* ── Verlauf ── */
   .sesscard{background:var(--card);border:1px solid var(--line);border-radius:16px;
-    padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
+    padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;cursor:pointer;}
+  .sesscard:active{opacity:.8;}
   .sess-ring{width:48px;height:48px;border-radius:50%;flex-shrink:0;
-    background:conic-gradient(var(--teal) 0deg 300deg, var(--line) 300deg);
     display:flex;align-items:center;justify-content:center;}
-  .sess-ring b{background:var(--chalk);width:34px;height:34px;border-radius:50%;
+  .sess-ring b{width:34px;height:34px;border-radius:50%;background:var(--chalk);
     display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;}
   .sess-meta{flex:1;}
   .sess-meta .d{font-weight:700;font-size:13px;}
   .sess-meta .t{font-size:11px;color:var(--muted);margin-top:2px;}
+  .sess-arr{color:var(--muted);font-size:18px;}
   .empty{text-align:center;color:var(--muted);font-size:13px;padding:40px 0;}
-
-  /* Raw */
-  .raw{font-size:10px;color:var(--muted);text-align:center;margin-top:10px;
-    font-family:ui-monospace,Menlo,monospace;word-break:break-all;}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wordmark">HOOP<b>YOUR</b>BODY<br>
-    <svg width="120" height="10" viewBox="0 0 120 10"><path d="M1 3 Q60 14 119 1" stroke="#B23A3F" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    <svg width="110" height="9" viewBox="0 0 110 9"><path d="M1 3 Q55 13 109 1" stroke="#B23A3F" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
   </div>
   <button class="sensor-btn" id="btnConnect">Sensor verbinden</button>
 </header>
 
-<!-- SCREEN: TRAINING -->
+<!-- TRAINING -->
 <div class="screen active" id="s-training">
   <p class="eyebrow">Live-Training</p>
   <h2 id="trainHead">Bereit?</h2>
-
   <div class="statusline" id="status"><span class="dot"></span><span id="statusText">Sensor nicht verbunden</span></div>
-
   <div class="pausebanner" id="pauseBanner">⏸ Pause</div>
-
   <div class="ringwrap">
     <div class="ring" id="ring">
       <div class="ring-in">
@@ -146,9 +139,7 @@
       </div>
     </div>
   </div>
-
   <div class="dirline" id="vDir">&mdash;</div>
-
   <div class="grid">
     <div class="tile"><div class="k">Tempo</div><div class="v teal" id="vRpm">0,0 U/min</div></div>
     <div class="tile"><div class="k">Trainingszeit</div><div class="v" id="vTime">0:00</div></div>
@@ -157,30 +148,41 @@
     <div class="tile"><div class="k">Pausen</div><div class="v red" id="vPauses">0</div></div>
     <div class="tile"><div class="k">Ø Tempo</div><div class="v" id="vAvg">0,0 U/min</div></div>
   </div>
-
   <div class="btnrow">
-    <button class="btn primary green" id="btnStart" disabled>▶ Starten</button>
+    <button class="btn primary" id="btnStart" disabled>▶ Starten</button>
     <button class="btn ghost" id="btnStop" disabled>■ Beenden</button>
   </div>
-
   <div class="raw" id="raw"></div>
 </div>
 
-<!-- SCREEN: VERLAUF -->
+<!-- VERLAUF -->
 <div class="screen" id="s-verlauf">
   <p class="eyebrow">Auswertung</p>
   <h2>Dein Verlauf</h2>
-  <div id="verlaufList"><div class="empty">Noch kein Training aufgezeichnet.</div></div>
+  <div id="verlaufList"></div>
 </div>
 
-<!-- Bottom nav -->
+<!-- MODAL: Session-Details -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">Session</h3>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="sum-grid" id="modalGrid"></div>
+    <div class="btnrow">
+      <button class="btn ghost" id="modalCloseBtn">Schließen</button>
+    </div>
+  </div>
+</div>
+
 <nav class="navbar">
   <button class="navitem on" data-target="s-training">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
     Training
   </button>
   <button class="navitem" data-target="s-verlauf">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
     Verlauf
   </button>
 </nav>
@@ -190,25 +192,17 @@
 var SERVICE='19b10000-e8f2-537e-4f6c-d104768a1214';
 var CHAR   ='19b10001-e8f2-537e-4f6c-d104768a1214';
 
-var device=null, connected=false;
-var sessionActive=false;
-var isPaused=false;
-
-// Session-Offsets
+var device=null, connected=false, sessionActive=false, isPaused=false;
 var offRev=0, offSw=0, offPause=0;
-var lastRaw={rev:0,sw:0,pauses:0};
+var lastRaw={rev:0, sw:0, pauses:0};
+var seconds=0, timerInterval=null, rpmSum=0, rpmCount=0;
 
-// Timer
-var seconds=0, timerInterval=null;
-var rpmSum=0, rpmCount=0;
-
-// Verlauf (localStorage)
 var history=[];
-try{ history=JSON.parse(localStorage.getItem('smarthoop_history')||'[]'); }catch(e){}
+try{ history=JSON.parse(localStorage.getItem('smarthoop_h')||'[]'); }catch(e){}
 
-function $(id){return document.getElementById(id);}
-function num(v,d){return v.toFixed(d).replace('.',',');}
-function fmtTime(s){var m=Math.floor(s/60);return m+':'+String(s%60).padStart(2,'0');}
+function $(id){ return document.getElementById(id); }
+function num(v,d){ return v.toFixed(d).replace('.',','); }
+function fmtTime(s){ return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
 function fmtDate(ts){
   var d=new Date(ts);
   return d.toLocaleDateString('de-AT',{weekday:'short',day:'numeric',month:'short'})+
@@ -220,7 +214,7 @@ function setStatus(t,m){
   $('status').className='statusline'+(m?' '+m:'');
 }
 
-// Navigation
+// Nav
 document.querySelectorAll('.navitem').forEach(function(btn){
   btn.addEventListener('click',function(){
     document.querySelectorAll('.navitem').forEach(function(b){b.classList.remove('on');});
@@ -231,43 +225,36 @@ document.querySelectorAll('.navitem').forEach(function(btn){
   });
 });
 
-// Sensor verbinden
+// Sensor
 $('btnConnect').addEventListener('click',function(){
-  if(connected){disconnect();}else{connect();}
+  connected ? disconnect() : connect();
 });
 
 async function connect(){
-  if(!navigator.bluetooth){
-    setStatus('Browser unterstützt kein Web Bluetooth','');
-    return;
-  }
+  if(!navigator.bluetooth){ setStatus('Kein Web Bluetooth',''); return; }
   try{
-    setStatus('Suche Sensor…');
+    setStatus('Suche…');
     device=await navigator.bluetooth.requestDevice({
-      filters:[{namePrefix:'SmartHoop'}],
-      optionalServices:[SERVICE]
+      filters:[{namePrefix:'SmartHoop'}], optionalServices:[SERVICE]
     });
     device.addEventListener('gattserverdisconnected',onDisconnected);
     setStatus('Verbinde…');
-    var server=await device.gatt.connect();
-    var service=await server.getPrimaryService(SERVICE);
-    var ch=await service.getCharacteristic(CHAR);
+    var s=await device.gatt.connect();
+    var svc=await s.getPrimaryService(SERVICE);
+    var ch=await svc.getCharacteristic(CHAR);
     await ch.startNotifications();
     ch.addEventListener('characteristicvaluechanged',onData);
     connected=true;
     $('btnConnect').textContent='Sensor trennen';
     $('btnConnect').classList.add('on');
     $('btnStart').disabled=false;
-    setStatus('Verbunden — bereit zum Starten','on');
+    setStatus('Verbunden — bereit','on');
     $('trainHead').textContent='Bereit?';
-  }catch(e){
-    setStatus('Verbindung fehlgeschlagen','');
-    console.error(e);
-  }
+  }catch(e){ setStatus('Verbindung fehlgeschlagen',''); console.error(e); }
 }
 
 function disconnect(){
-  try{if(device&&device.gatt.connected)device.gatt.disconnect();}catch(e){}
+  try{ if(device&&device.gatt.connected) device.gatt.disconnect(); }catch(e){}
   onDisconnected();
 }
 
@@ -281,11 +268,10 @@ function onDisconnected(){
   if(sessionActive) stopSession(true);
 }
 
-// Session starten
+// Session
 $('btnStart').addEventListener('click',function(){
   if(!sessionActive) startSession();
 });
-
 $('btnStop').addEventListener('click',function(){
   if(sessionActive) stopSession(false);
 });
@@ -293,25 +279,16 @@ $('btnStop').addEventListener('click',function(){
 function startSession(){
   sessionActive=true;
   seconds=0; rpmSum=0; rpmCount=0;
-  // Offsets auf aktuelle Sensor-Werte setzen
   offRev=lastRaw.rev; offSw=lastRaw.sw; offPause=lastRaw.pauses;
-
   $('btnStart').disabled=true;
   $('btnStop').disabled=false;
   $('btnStart').textContent='▶ Läuft…';
-
   setStatus('Training läuft','rec');
   $('trainHead').textContent='Training läuft';
-
-  // Alle Anzeigen zurücksetzen
-  $('vRev').textContent='0';
-  $('vSw').textContent='0';
-  $('vPauses').textContent='0';
+  ['vRev','vSw','vPauses','vAvg'].forEach(function(id){ $(id).textContent='0'; });
   $('vTime').textContent='0:00';
-  $('vAvg').textContent='0,0 U/min';
   $('vDir').innerHTML='&mdash;';
   $('ring').style.background='conic-gradient(var(--red) 0deg, var(--line) 0deg)';
-
   timerInterval=setInterval(function(){
     if(!isPaused) seconds++;
     $('vTime').textContent=fmtTime(seconds);
@@ -322,116 +299,104 @@ function stopSession(silent){
   if(!sessionActive) return;
   sessionActive=false;
   clearInterval(timerInterval);
-
   $('btnStart').disabled=false;
   $('btnStart').textContent='▶ Starten';
   $('btnStop').disabled=true;
-
-  if(connected) setStatus('Verbunden — bereit zum Starten','on');
+  if(connected) setStatus('Verbunden — bereit','on');
   $('trainHead').textContent='Fertig!';
-
   if(!silent){
-    // Session speichern
-    var rev=parseInt($('vRev').textContent)||0;
-    var sw=parseInt($('vSw').textContent)||0;
-    var pauses=parseInt($('vPauses').textContent)||0;
-    var avg=rpmCount?rpmSum/rpmCount:0;
-
     var entry={
       ts:Date.now(),
       duration:seconds,
-      rev:rev,
-      sw:sw,
-      pauses:pauses,
-      avgRpm:avg
+      rev:parseInt($('vRev').textContent)||0,
+      sw:parseInt($('vSw').textContent)||0,
+      pauses:parseInt($('vPauses').textContent)||0,
+      avgRpm:rpmCount?rpmSum/rpmCount:0
     };
     history.unshift(entry);
-    if(history.length>50) history.pop();
-    try{localStorage.setItem('smarthoop_history',JSON.stringify(history));}catch(e){}
-
-    // Zusammenfassung anzeigen
-    showSummary(entry);
+    if(history.length>100) history.pop();
+    try{ localStorage.setItem('smarthoop_h',JSON.stringify(history)); }catch(e){}
+    openModal(entry);
   }
 }
 
-function showSummary(e){
-  var el=document.createElement('div');
-  el.className='summary';
-  el.innerHTML='<h3>&#127942; Session abgeschlossen</h3>'+
-    '<div class="sum-grid">'+
-    '<div class="sum-item"><div class="k">Dauer</div><div class="v">'+fmtTime(e.duration)+'</div></div>'+
-    '<div class="sum-item"><div class="k">Umdrehungen</div><div class="v teal">'+e.rev+'</div></div>'+
-    '<div class="sum-item"><div class="k">Hüftschwünge</div><div class="v">'+e.sw+'</div></div>'+
-    '<div class="sum-item"><div class="k">Ø Tempo</div><div class="v gold">'+num(e.avgRpm,1)+' U/min</div></div>'+
-    '</div>';
-
-  // Über den Training-Screen einblenden
-  var s=$('s-training');
-  s.insertBefore(el,s.firstChild);
-  setTimeout(function(){
-    if(el.parentNode) el.parentNode.removeChild(el);
-  },12000);
-}
-
-// Daten empfangen
+// Daten
 function onData(ev){
   try{
     var text=new TextDecoder().decode(ev.target.value).trim();
     $('raw').textContent=text;
     var p=text.split(',');
     if(p.length<7) return;
-
     var rev=parseInt(p[0],10)||0;
     var dir=parseInt(p[1],10)||0;
     var deg=parseFloat(p[2])||0;
     var sw=parseInt(p[3],10)||0;
     var force=parseFloat(p[4])||0;
-    var pause=(p[5].trim()==='1');
+    var pause=p[5].trim()==='1';
     var pauses=parseInt(p[6],10)||0;
-
     lastRaw={rev:rev,sw:sw,pauses:pauses};
     isPaused=pause;
-
-    if(!sessionActive) return;  // nur anzeigen wenn Session läuft
-
+    if(!sessionActive) return;
     var rpm=Math.abs(deg)/6;
-    var dRev=Math.max(0,rev-offRev);
-    var dSw=Math.max(0,sw-offSw);
-    var dPauses=Math.max(0,pauses-offPause);
-
-    $('vRev').textContent=dRev;
-    $('vSw').textContent=dSw;
-    $('vPauses').textContent=dPauses;
+    $('vRev').textContent=Math.max(0,rev-offRev);
+    $('vSw').textContent=Math.max(0,sw-offSw);
+    $('vPauses').textContent=Math.max(0,pauses-offPause);
     $('vRpm').textContent=num(rpm,1)+' U/min';
     $('vForce').textContent=num(force,1)+' N';
-    $('vDir').textContent=pause?'\u2014':(dir>0?'\u2192 rechts':(dir<0?'\u2190 links':'\u2014'));
+    $('vDir').textContent=pause?'—':(dir>0?'→ rechts':(dir<0?'← links':'—'));
     $('pauseBanner').className='pausebanner'+(pause?' show':'');
-
     var d=Math.min(360,(rpm/90)*360);
     $('ring').style.background='conic-gradient(var(--red) '+d+'deg, var(--line) '+d+'deg)';
-
-    if(!pause&&rpm>0){rpmSum+=rpm;rpmCount++;}
+    if(!pause&&rpm>0){ rpmSum+=rpm; rpmCount++; }
     $('vAvg').textContent=num(rpmCount?rpmSum/rpmCount:0,1)+' U/min';
-  }catch(e){console.error(e);}
+  }catch(e){ console.error(e); }
 }
 
-// Verlauf rendern
+// Modal
+function openModal(e){
+  $('modalTitle').textContent='🏆 '+fmtDate(e.ts);
+  $('modalGrid').innerHTML=
+    '<div class="sum-item"><div class="k">Dauer</div><div class="v">'+fmtTime(e.duration)+'</div></div>'+
+    '<div class="sum-item"><div class="k">Umdrehungen</div><div class="v teal">'+e.rev+'</div></div>'+
+    '<div class="sum-item"><div class="k">Hüftschwünge</div><div class="v">'+e.sw+'</div></div>'+
+    '<div class="sum-item"><div class="k">Pausen</div><div class="v red">'+e.pauses+'</div></div>'+
+    '<div class="sum-item"><div class="k">Ø Tempo</div><div class="v gold">'+num(e.avgRpm,1)+' U/min</div></div>'+
+    '<div class="sum-item"><div class="k">Aktive Zeit</div><div class="v">'+fmtTime(Math.max(0,e.duration-e.pauses*5))+'</div></div>';
+  $('overlay').classList.add('show');
+}
+
+function closeModal(){
+  $('overlay').classList.remove('show');
+}
+$('modalClose').addEventListener('click',closeModal);
+$('modalCloseBtn').addEventListener('click',closeModal);
+$('overlay').addEventListener('click',function(e){
+  if(e.target===$('overlay')) closeModal();
+});
+
+// Verlauf
 function renderVerlauf(){
   var el=$('verlaufList');
   if(!history.length){
-    el.innerHTML='<div class="empty">Noch kein Training aufgezeichnet.</div>';
+    el.innerHTML='<div class="empty">Noch kein Training aufgezeichnet.<br>Starte dein erstes Training!</div>';
     return;
   }
-  el.innerHTML=history.map(function(e){
-    var pct=Math.min(100,Math.round((e.rev/100)*100));
-    return '<div class="sesscard">'+
-      '<div class="sess-ring" style="background:conic-gradient(var(--teal) 0deg '+Math.round(pct*3.6)+'deg, var(--line) '+Math.round(pct*3.6)+'deg 360deg)">'+
+  el.innerHTML=history.map(function(e,i){
+    var pct=Math.min(360,Math.round((e.rev/100)*360));
+    return '<div class="sesscard" data-i="'+i+'">'+
+      '<div class="sess-ring" style="background:conic-gradient(var(--teal) 0deg '+pct+'deg, var(--line) '+pct+'deg 360deg)">'+
         '<b>'+e.rev+'</b></div>'+
       '<div class="sess-meta">'+
         '<div class="d">'+fmtDate(e.ts)+'</div>'+
-        '<div class="t">'+fmtTime(e.duration)+' &middot; '+e.sw+' Schw&uuml;nge &middot; '+e.pauses+' Pausen &middot; '+num(e.avgRpm,1)+' U/min</div>'+
-      '</div></div>';
+        '<div class="t">'+fmtTime(e.duration)+' · '+e.sw+' Schwünge · '+num(e.avgRpm,1)+' U/min</div>'+
+      '</div>'+
+      '<span class="sess-arr">›</span></div>';
   }).join('');
+  el.querySelectorAll('.sesscard').forEach(function(card){
+    card.addEventListener('click',function(){
+      openModal(history[parseInt(card.dataset.i)]);
+    });
+  });
 }
 
 })();
