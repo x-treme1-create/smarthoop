@@ -368,10 +368,12 @@ function openModal(e){
 function closeModal(){
   $('overlay').classList.remove('show');
 }
-$('modalClose').addEventListener('click',closeModal);
-$('modalCloseBtn').addEventListener('click',closeModal);
-$('overlay').addEventListener('click',function(e){
-  if(e.target===$('overlay')) closeModal();
+['click','touchend'].forEach(function(ev){
+  $('modalClose').addEventListener(ev, function(e){e.preventDefault();closeModal();});
+  $('modalCloseBtn').addEventListener(ev, function(e){e.preventDefault();closeModal();});
+  $('overlay').addEventListener(ev, function(e){
+    if(e.target===$('overlay')){e.preventDefault();closeModal();}
+  });
 });
 
 // Verlauf
@@ -393,9 +395,13 @@ function renderVerlauf(){
       '<span class="sess-arr">›</span></div>';
   }).join('');
   el.querySelectorAll('.sesscard').forEach(function(card){
-    card.addEventListener('click',function(){
+    // click UND touchend für Bluefy/iOS
+    function handleOpen(e){
+      e.preventDefault();
       openModal(history[parseInt(card.dataset.i)]);
-    });
+    }
+    card.addEventListener('click', handleOpen);
+    card.addEventListener('touchend', handleOpen);
   });
 }
 
