@@ -17,8 +17,7 @@ body{padding:env(safe-area-inset-top) 0 calc(80px + env(safe-area-inset-bottom))
 
 /* Header */
 header{padding:14px 20px 10px;display:flex;align-items:center;justify-content:space-between;}
-.wordmark{font-family:'Poppins',sans-serif;font-weight:800;font-style:italic;font-size:13px;letter-spacing:.05em;}
-.wordmark b{color:var(--gold);}
+.logo{height:30px;width:auto;display:block;}
 .sensor-btn{font-family:'Inter',sans-serif;font-weight:700;font-size:12px;
   background:var(--card);border:1px solid var(--line);border-radius:20px;padding:7px 14px;cursor:pointer;}
 .sensor-btn.on{background:var(--teal);color:#fff;border-color:var(--teal);}
@@ -150,9 +149,7 @@ h2{font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;margin:0 0 14
 <body>
 
 <header>
-  <div class="wordmark">HOOP<b>YOUR</b>BODY<br>
-    <svg width="110" height="9" viewBox="0 0 110 9"><path d="M1 3 Q55 13 109 1" stroke="#B23A3F" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-  </div>
+  <img class="logo" src="logo.png" alt="Hoop Your Body">
   <button class="sensor-btn" id="btnConnect">Sensor verbinden</button>
 </header>
 
