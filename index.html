@@ -18,9 +18,17 @@ body{padding:env(safe-area-inset-top) 0 calc(80px + env(safe-area-inset-bottom))
 /* Header */
 header{padding:14px 20px 10px;display:flex;align-items:center;justify-content:space-between;}
 .logo{height:30px;width:auto;display:block;}
+.header-right{display:flex;align-items:center;gap:8px;}
 .sensor-btn{font-family:'Inter',sans-serif;font-weight:700;font-size:12px;
   background:var(--card);border:1px solid var(--line);border-radius:20px;padding:7px 14px;cursor:pointer;}
 .sensor-btn.on{background:var(--teal);color:#fff;border-color:var(--teal);}
+.batt-pill{font-family:'Inter',sans-serif;font-weight:700;font-size:12px;
+  background:var(--card);border:1px solid var(--line);border-radius:20px;padding:7px 10px;
+  display:flex;align-items:center;gap:4px;color:var(--muted);white-space:nowrap;}
+.batt-pill.ok{color:var(--green);border-color:var(--green);}
+.batt-pill.mid{color:var(--gold);border-color:var(--gold);}
+.batt-pill.low{color:var(--red);border-color:var(--red);}
+.batt-pill.chg{color:var(--teal);border-color:var(--teal);}
 
 /* Profile pill */
 .profile-bar{padding:0 20px 12px;display:flex;align-items:center;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
@@ -150,7 +158,12 @@ h2{font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;margin:0 0 14
 
 <header>
   <img class="logo" src="logo.png" alt="Hoop Your Body">
-  <button class="sensor-btn" id="btnConnect">Sensor verbinden</button>
+  <div class="header-right">
+    <div class="batt-pill" id="battPill" style="display:none;">
+      <span id="battIcon">🔋</span><span id="battText">--%</span>
+    </div>
+    <button class="sensor-btn" id="btnConnect">Sensor verbinden</button>
+  </div>
 </header>
 
 <div class="profile-bar" id="profileBar"></div>
@@ -431,7 +444,23 @@ function onDisconnected(){
   $('btnConnect').classList.remove('on');
   $('btnStart').disabled=true;$('btnStop').disabled=true;
   setStatus('Sensor nicht verbunden','');
+  $('battPill').style.display='none';
   if(sessionActive)stopSession(true);
+}
+
+// Akku-Anzeige
+function updateBattery(pct){
+  var pill=$('battPill'),icon=$('battIcon'),txt=$('battText');
+  pill.style.display='flex';
+  pill.className='batt-pill';
+  if(pct===-1||isNaN(pct)){
+    icon.textContent='⚡';txt.textContent='Lädt';pill.classList.add('chg');
+    return;
+  }
+  pct=Math.max(0,Math.min(100,pct));
+  icon.textContent=pct<=15?'🪫':'🔋';
+  txt.textContent=pct+'%';
+  pill.classList.add(pct<=15?'low':(pct<=40?'mid':'ok'));
 }
 function setStatus(t,m){
   $('statusText').textContent=t;
@@ -494,6 +523,7 @@ function onData(ev){
     var rev=parseInt(p2[0],10)||0,dir=parseInt(p2[1],10)||0,deg=parseFloat(p2[2])||0;
     var sw=parseInt(p2[3],10)||0,force=parseFloat(p2[4])||0;
     var pause=p2[5].trim()==='1',pauses=parseInt(p2[6],10)||0;
+    if(p2.length>=8){var batt=parseInt(p2[7],10);if(!isNaN(batt))updateBattery(batt);}
     lastRaw={rev:rev,sw:sw,pauses:pauses,deg:deg};isPaused=pause;
     if(!sessionActive)return;
     var rpm=Math.abs(deg)/6;
